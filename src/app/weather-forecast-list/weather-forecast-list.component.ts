@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
 import { weatherBit } from '../../environments/environment';
+
+import { WeatherForecast } from '../models/weather-forecast';
+import { CityDetails } from '../models/city-details';
 
 @Component({
   selector: 'app-weather-forecast-list',
