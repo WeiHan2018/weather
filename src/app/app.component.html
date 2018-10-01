@@ -6,7 +6,6 @@
     Please input city name and state code:
   </p>
   <input [(ngModel)]="searchText" />
-  
 </div>
 
-<app-weather-forecast></app-weather-forecast>
+<app-weather-forecast-list [searchText]="searchText"></app-weather-forecast-list>

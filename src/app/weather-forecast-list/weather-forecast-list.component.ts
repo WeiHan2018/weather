@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { weatherBit } from '../../environments/environment';
@@ -12,9 +12,10 @@ import { CityDetails } from '../models/city-details';
   styleUrls: ['./weather-forecast-list.component.css']
 })
 export class WeatherForecastListComponent implements OnInit {
+  @Input() searchText: string;
+  
   weatherBitUrl: string;
   weatherForecasts: WeatherForecast[];
-  searchText: string;
   cityDetails: CityDetails;
   constructor(private http: HttpClient) {
     this.weatherForecasts = [];
@@ -24,6 +25,7 @@ export class WeatherForecastListComponent implements OnInit {
   getWeather() {
     this.weatherBitUrl = `${weatherBit.urlBase}?city=${this.searchText}&key=${weatherBit.apiKey}`;
     //subscribe to weatherbit forecase results here
+    
   }
 
   ngOnInit() {
