@@ -6,6 +6,8 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./weather-forecast.component.css'],
 })
 export class WeatherForecastComponent implements OnInit {
+  
+  
   constructor() {
   }
 
