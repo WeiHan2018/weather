@@ -32,9 +32,14 @@ export class WeatherForecastListComponent implements OnInit {
         console.log(response);
         console.log('WEATHER RESULTS ....');
         
-        //this.cityDetails.cityName = response['city_name'];
-        //this.cityDetails.stateCode = response['state_code'];
-        //this.weatherForecasts = response['data'];
+        this.cityDetails = new CityDetails();
+        this.cityDetails.cityName = response['city_name'];
+        this.cityDetails.stateCode = response['state_code'];
+        this.cityDetails.countryCode = response['country_code'];
+        this.cityDetails.latitude = response['lat'];
+        this.cityDetails.longitude = response['lon'];
+        this.cityDetails.timeZone = response['timezone'];
+        this.weatherForecasts = response['data'];
       }
     );
   }

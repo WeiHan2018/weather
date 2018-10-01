@@ -1,5 +1,22 @@
 <div>
   <p>******The following is from weather-forecast-list:</p>
   <button (click)="getWeather()">Get Weather</button>
+  
+  <h4>Weather Forecast:</h4>
+
+  <div *ngIf="cityDetails!==undefine">
+    <h5>City Information:</h5>
+    <div>City Name: {{ cityDetails.cityName }}</div>
+    <div>State Code: {{ cityDetails.stateCode }}</div>
+    <div>Country Code: {{ cityDetails.countryCode }}</div>
+    <div>Time Zone: {{ cityDetails.timeZone }}</div>
+    <div>Longitude: {{ cityDetails.longitude }}</div>
+    <div>Latitude: {{ cityDetails.latitude }}</div>
+    
+    <h5>Weather Forecast Information:</h5>
+    <div *ngFor="let weatherForecast of weatherForecasts">
+      <app-weather-forecast></app-weather-forecast>
+    </div>
+  </div>
 </div>
 
