@@ -17,6 +17,7 @@ export class WeatherForecastListComponent implements OnInit {
   weatherBitUrl: string;
   weatherForecasts: WeatherForecast[];
   cityDetails: CityDetails;
+  
   constructor(private http: HttpClient) {
     this.weatherForecasts = [];
     this.weatherBitUrl = ``;
@@ -25,7 +26,17 @@ export class WeatherForecastListComponent implements OnInit {
   getWeather() {
     this.weatherBitUrl = `${weatherBit.urlBase}?city=${this.searchText}&key=${weatherBit.apiKey}`;
     //subscribe to weatherbit forecase results here
-    
+    this.http.get(this.weatherBitUrl).subscribe(
+      (response) => {
+        console.log('WEATHER RESULTS ....');
+        console.log(response);
+        console.log('WEATHER RESULTS ....');
+        
+        //this.cityDetails.cityName = response['city_name'];
+        //this.cityDetails.stateCode = response['state_code'];
+        //this.weatherForecasts = response['data'];
+      }
+    );
   }
 
   ngOnInit() {
