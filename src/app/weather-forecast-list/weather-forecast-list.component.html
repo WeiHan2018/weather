@@ -4,7 +4,7 @@
   
   <h4>Weather Forecast:</h4>
 
-  <div *ngIf="cityDetails!==undefine">
+  <div *ngIf="cityDetails!==null">
     <h5>City Information:</h5>
     <div>City Name: {{ cityDetails.cityName }}</div>
     <div>State Code: {{ cityDetails.stateCode }}</div>
@@ -14,8 +14,9 @@
     <div>Latitude: {{ cityDetails.latitude }}</div>
     
     <h5>Weather Forecast Information:</h5>
+    <p>******The following is from each weather-forecast:</p>
     <div *ngFor="let weatherForecast of weatherForecasts">
-      <app-weather-forecast></app-weather-forecast>
+      <app-weather-forecast [weatherForecast]="weatherForecast"></app-weather-forecast>
     </div>
   </div>
 </div>

@@ -21,6 +21,7 @@ export class WeatherForecastListComponent implements OnInit {
   constructor(private http: HttpClient) {
     this.weatherForecasts = [];
     this.weatherBitUrl = ``;
+    this.cityDetails = null;
   }
 
   getWeather() {
@@ -28,10 +29,18 @@ export class WeatherForecastListComponent implements OnInit {
     //subscribe to weatherbit forecase results here
     this.http.get(this.weatherBitUrl).subscribe(
       (response) => {
+        if (response === null) {
+          console.log(`Failed to get weather in ${this.searchText}!`);
+          this.cityDetails = null;
+          this.weatherForecasts = [];
+          return;
+        }
+
         console.log('WEATHER RESULTS ....');
         console.log(response);
         console.log('WEATHER RESULTS ....');
         
+        // set detailed city information to CityDetails 
         this.cityDetails = new CityDetails();
         this.cityDetails.cityName = response['city_name'];
         this.cityDetails.stateCode = response['state_code'];
@@ -39,7 +48,22 @@ export class WeatherForecastListComponent implements OnInit {
         this.cityDetails.latitude = response['lat'];
         this.cityDetails.longitude = response['lon'];
         this.cityDetails.timeZone = response['timezone'];
-        this.weatherForecasts = response['data'];
+        
+        // set detailed weather information to WeatherForecasts list
+        let originWeatherForecasts = response['data'];
+        this.weatherForecasts = [];
+        originWeatherForecasts.forEach(originWeatherForecast => {
+          let weatherForecast = new WeatherForecast();
+          weatherForecast.datetime = originWeatherForecast['datetime'];
+          weatherForecast.temp = originWeatherForecast['temp'];
+          weatherForecast.maxTemp = originWeatherForecast['max_temp'];
+          weatherForecast.minTemp = originWeatherForecast['min_temp']
+          weatherForecast.weatherDescription = originWeatherForecast.weather.description;
+          weatherForecast.windDirectionFull = originWeatherForecast['wind_cdir_full'];
+          weatherForecast.windSpeed = originWeatherForecast['wind_spd'];
+
+          this.weatherForecasts.push(weatherForecast);
+        });
       }
     );
   }
